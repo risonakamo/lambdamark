@@ -28,9 +28,19 @@ class ControlHandler extends React.Component {
 class MarksHandler extends React.Component {
   constructor(props) {
     super(props);
+    this.navigateFolder = this.navigateFolder.bind(this);
     this.state = {
       data: this.props.data
     };
+  } //given a folder id, go to that folder
+
+
+  navigateFolder(folderId) {
+    chrome.bookmarks.getChildren(folderId, data => {
+      this.setState({
+        data
+      });
+    });
   }
 
   render() {
@@ -39,20 +49,25 @@ class MarksHandler extends React.Component {
     }, this.state.data.map((x, i) => {
       return React.createElement(MarkEntry, {
         data: x,
-        key: i
+        key: i,
+        navigateFolder: this.navigateFolder
       });
     }));
   }
 
-} //MarkEntry(bookmarkObject data)
+} //MarkEntry(bookmarkObject data,parent-function navigateFolder)
 //data: bookmark object from chrome api (see data specs)
+//navigateFolder: navigateFolder function from parent
 
 
 class MarkEntry extends React.Component {
   render() {
     if (!this.props.data.url) {
       return React.createElement("div", {
-        className: "mark folder"
+        className: "mark folder",
+        onClick: () => {
+          this.props.navigateFolder(this.props.data.id);
+        }
       }, React.createElement("img", {
         src: "material-folder.svg"
       }), React.createElement("p", null, this.props.data.title));

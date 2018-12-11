@@ -73,8 +73,10 @@ a {
   height: 25px;
 }
 .mark p {
+  width: 100%;
   max-height: 75px;
   overflow: hidden;
   padding: 0px 5px 0px 5px;
+  word-break: break-word;
   box-sizing: border-box;
 }

@@ -2,14 +2,14 @@
 type bookmarkObject
 {
     title: string,
-    url?: string,
+    url?: string, #not present if object is a FOLDER
 
     id: string, #the unique id of the bookmark node
     index: int, #seems to be the child index of the node
                 #in respect to the children array
 
     dateAdded: int,
-    dateGroupModified?: int,
+    dateGroupModified?: int, #doesnt always seem to be present
     parentId: string #seems to be the unique id of the parent
                      #the node belongs to. useful for navigating
                      #upwards maybe.
