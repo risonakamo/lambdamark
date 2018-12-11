@@ -2,29 +2,56 @@
 //data: initial data of bookmarkobjects
 class LambdaRoot extends React.Component
 {
+  constructor(props)
+  {
+    super(props);
+
+    this.marksHandlerRef=React.createRef();
+  }
+
   render()
   {
     return <>
-      <ControlHandler/>
+      <ControlHandler marksHandler={this.marksHandlerRef} initialToast={{title:"/",id:"2"}}/>
 
-      <MarksHandler data={this.props.data}/>
+      <MarksHandler data={this.props.data} ref={this.marksHandlerRef}/>
     </>;
   }
 }
 
-//ControlHandler()
+//ControlHandler(component-ref marksHandler,bookmarkObject initialToast)
+//marksHandler: the markshandler component ref
+//initialToast: bookmark object to start with
 class ControlHandler extends React.Component
 {
+  constructor(props)
+  {
+    super(props);
+
+    this.state={
+      toasts:[this.props.initialToast]
+    };
+  }
+
   render()
   {
     return <div className="control">
-      <div className="toast">
-        <p>stuff</p>
-      </div>
+      {this.state.toasts.map((x,i)=>{
+        return <NavToast data={x} marksHandler={this.props.marksHandler} key={i}/>;
+      })}
+    </div>;
+  }
+}
 
-      <div className="toast">
-        <p>stuffstuffstuffstuffstuffstuffstuffs</p>
-      </div>
+//NavToast(bookmarkObject data,component marksHandler)
+//data: bookmark object for a folder that the toast corresponds to
+//marksHandler: navigate folder function from MarksHandler
+class NavToast extends React.Component
+{
+  render()
+  {
+    return <div className="toast" onClick={()=>{this.props.marksHandler.current.navigateFolder(this.props.data.id)}}>
+      <p>{this.props.data.title}</p>
     </div>;
   }
 }

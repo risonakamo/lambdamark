@@ -1,24 +1,62 @@
 //LambdaRoot(bookmarkObject[] data)
 //data: initial data of bookmarkobjects
 class LambdaRoot extends React.Component {
+  constructor(props) {
+    super(props);
+    this.marksHandlerRef = React.createRef();
+  }
+
   render() {
-    return React.createElement(React.Fragment, null, React.createElement(ControlHandler, null), React.createElement(MarksHandler, {
-      data: this.props.data
+    return React.createElement(React.Fragment, null, React.createElement(ControlHandler, {
+      marksHandler: this.marksHandlerRef,
+      initialToast: {
+        title: "/",
+        id: "2"
+      }
+    }), React.createElement(MarksHandler, {
+      data: this.props.data,
+      ref: this.marksHandlerRef
     }));
   }
 
-} //ControlHandler()
+} //ControlHandler(component-ref marksHandler,bookmarkObject initialToast)
+//marksHandler: the markshandler component ref
+//initialToast: bookmark object to start with
 
 
 class ControlHandler extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toasts: [this.props.initialToast]
+    };
+  }
+
   render() {
     return React.createElement("div", {
       className: "control"
-    }, React.createElement("div", {
-      className: "toast"
-    }, React.createElement("p", null, "stuff")), React.createElement("div", {
-      className: "toast"
-    }, React.createElement("p", null, "stuffstuffstuffstuffstuffstuffstuffs")));
+    }, this.state.toasts.map((x, i) => {
+      return React.createElement(NavToast, {
+        data: x,
+        marksHandler: this.props.marksHandler,
+        key: i
+      });
+    }));
+  }
+
+} //NavToast(bookmarkObject data,component marksHandler)
+//data: bookmark object for a folder that the toast corresponds to
+//marksHandler: navigate folder function from MarksHandler
+
+
+class NavToast extends React.Component {
+  render() {
+    return React.createElement("div", {
+      className: "toast",
+      onClick: () => {
+        this.props.marksHandler.current.navigateFolder(this.props.data.id);
+      }
+    }, React.createElement("p", null, this.props.data.title));
   }
 
 } //MarksHandler(bookmarkObject[] data)
