@@ -4,9 +4,9 @@
     "version":"0",
     "description":"change later",
 
-    "permissions":["chrome://favicon/"],
+    "permissions":["chrome://favicon/","bookmarks"],
 
     "chrome_url_overrides":{
-        "newtab":"newtab.html"
+        "newtab":"newtab/newtab.html"
     }
 }

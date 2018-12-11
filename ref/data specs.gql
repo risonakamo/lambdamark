@@ -1,0 +1,16 @@
+# data object returned by chrome bookmarks getChildren() in an array.
+type bookmarkObject
+{
+    title: string,
+    url?: string,
+
+    id: string, #the unique id of the bookmark node
+    index: int, #seems to be the child index of the node
+                #in respect to the children array
+
+    dateAdded: int,
+    dateGroupModified?: int,
+    parentId: string #seems to be the unique id of the parent
+                     #the node belongs to. useful for navigating
+                     #upwards maybe.
+}
