@@ -1,0 +1,12 @@
+{
+    "manifest_version":2,
+    "name":"lambdamark",
+    "version":"0",
+    "description":"change later",
+
+    "permissions":["chrome://favicon/"],
+
+    "chrome_url_overrides":{
+        "newtab":"newtab.html"
+    }
+}
