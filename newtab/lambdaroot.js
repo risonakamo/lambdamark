@@ -51,7 +51,11 @@ class MarksHandler extends React.Component {
 class MarkEntry extends React.Component {
   render() {
     if (!this.props.data.url) {
-      return null;
+      return React.createElement("div", {
+        className: "mark folder"
+      }, React.createElement("img", {
+        src: "material-folder.svg"
+      }), React.createElement("p", null, this.props.data.title));
     }
 
     return React.createElement("a", {

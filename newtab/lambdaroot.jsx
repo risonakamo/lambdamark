@@ -60,7 +60,10 @@ class MarkEntry extends React.Component
   {
     if (!this.props.data.url)
     {
-      return null;
+      return <div className="mark folder">
+        <img src="material-folder.svg"/>
+        <p>{this.props.data.title}</p>
+      </div>;
     }
 
     return <a className="mark" href={this.props.data.url}>

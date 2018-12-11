@@ -42,15 +42,30 @@ a {
   line-height: 30px;
 }
 .mark {
-  display: inline-block;
+  display: inline-flex;
   width: 90px;
+  height: 118px;
   text-align: center;
   border-radius: 16px;
   padding: 5px 0 10px 0;
   vertical-align: top;
+  margin: 1px;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   transition: background-color 0.2s;
 }
 .mark:hover {
+  background-color: #b5a17c;
+}
+.mark.folder {
+  background-color: #353030;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.mark.folder:hover {
   background-color: #b5a17c;
 }
 .mark img {

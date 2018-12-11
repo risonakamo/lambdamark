@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+@dark-color: #353030;
+@light-brown: #b5a17c;
+
 body
 {
     margin: 0;
@@ -47,7 +50,7 @@ a
     {
         display: inline-block;
         height: 30px;
-        background-color: #353030;
+        background-color: @dark-color;
         border-radius: 5px;
         margin: 0 1px 0 1px;
 
@@ -63,17 +66,36 @@ a
 
 .mark
 {
-    display: inline-block;
+    display: inline-flex;
     width: 90px;
+    height: 118px;
     text-align: center;
     border-radius: 16px;
     padding: 5px 0 10px 0;
     vertical-align: top;
+    margin: 1px;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     transition: background-color .2s;
 
     &:hover
     {
-        background-color: #b5a17c;
+        background-color: @light-brown;
+    }
+
+    &.folder
+    {
+        background-color: @dark-color;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover
+        {
+            background-color: @light-brown;
+        }
     }
 
     img
