@@ -14,3 +14,10 @@ type bookmarkObject
                      #the node belongs to. useful for navigating
                      #upwards maybe.
 }
+
+# smaller bookmark object for toasts
+type bookmarkObjectToast
+{
+    title: string,
+    id: string
+}

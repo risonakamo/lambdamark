@@ -4,6 +4,7 @@ class LambdaRoot extends React.Component {
   constructor(props) {
     super(props);
     this.marksHandlerRef = React.createRef();
+    this.controlHandlerRef = React.createRef();
   }
 
   render() {
@@ -12,9 +13,11 @@ class LambdaRoot extends React.Component {
       initialToast: {
         title: "/",
         id: "2"
-      }
+      },
+      ref: this.controlHandlerRef
     }), React.createElement(MarksHandler, {
       data: this.props.data,
+      controlHandler: this.controlHandlerRef,
       ref: this.marksHandlerRef
     }));
   }
@@ -30,6 +33,17 @@ class ControlHandler extends React.Component {
     this.state = {
       toasts: [this.props.initialToast]
     };
+  } //add a toast with the specified stuff
+
+
+  addToast(folderId, folderName) {
+    this.state.toasts.push({
+      title: folderName,
+      id: folderId
+    });
+    this.setState({
+      toasts: this.state.toasts
+    });
   }
 
   render() {
@@ -44,8 +58,8 @@ class ControlHandler extends React.Component {
     }));
   }
 
-} //NavToast(bookmarkObject data,component marksHandler)
-//data: bookmark object for a folder that the toast corresponds to
+} //NavToast(bookmarkObjectToast data,component marksHandler)
+//data: smaller version of a bookmark object for a folder that the toast corresponds to
 //marksHandler: navigate folder function from MarksHandler
 
 
@@ -54,13 +68,14 @@ class NavToast extends React.Component {
     return React.createElement("div", {
       className: "toast",
       onClick: () => {
-        this.props.marksHandler.current.navigateFolder(this.props.data.id);
+        this.props.marksHandler.current.navigateFolder(this.props.data.id, this.props.data.title);
       }
     }, React.createElement("p", null, this.props.data.title));
   }
 
-} //MarksHandler(bookmarkObject[] data)
+} //MarksHandler(bookmarkObject[] data,component controlHandler)
 //data: initial data of bookmark objects
+//controlHandler: the controlHandler component
 
 
 class MarksHandler extends React.Component {
@@ -70,11 +85,12 @@ class MarksHandler extends React.Component {
     this.state = {
       data: this.props.data
     };
-  } //given a folder id, go to that folder
+  } //given a folder id, go to that folder. provide title for toast functions
 
 
-  navigateFolder(folderId) {
+  navigateFolder(folderId, folderName = "") {
     chrome.bookmarks.getChildren(folderId, data => {
+      this.props.controlHandler.current.addToast(folderId, folderName);
       this.setState({
         data
       });
@@ -104,7 +120,7 @@ class MarkEntry extends React.Component {
       return React.createElement("div", {
         className: "mark folder",
         onClick: () => {
-          this.props.navigateFolder(this.props.data.id);
+          this.props.navigateFolder(this.props.data.id, this.props.data.title);
         }
       }, React.createElement("img", {
         src: "material-folder.svg"
