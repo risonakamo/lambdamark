@@ -44,6 +44,14 @@ class ControlHandler extends React.Component {
     this.setState({
       toasts: this.state.toasts
     });
+  } //give toast index to pop off all toasts past that index
+  //(so the index is NOT removed)
+
+
+  modifyToast(index) {
+    this.setState({
+      toasts: this.state.toasts.slice(0, index + 1)
+    });
   }
 
   render() {
@@ -53,14 +61,16 @@ class ControlHandler extends React.Component {
       return React.createElement(NavToast, {
         data: x,
         marksHandler: this.props.marksHandler,
-        key: i
+        key: i,
+        index: i
       });
     }));
   }
 
-} //NavToast(bookmarkObjectToast data,component marksHandler)
+} //NavToast(bookmarkObjectToast data,component marksHandler,int index)
 //data: smaller version of a bookmark object for a folder that the toast corresponds to
 //marksHandler: navigate folder function from MarksHandler
+//index: toast index given during render
 
 
 class NavToast extends React.Component {
@@ -68,7 +78,7 @@ class NavToast extends React.Component {
     return React.createElement("div", {
       className: "toast",
       onClick: () => {
-        this.props.marksHandler.current.navigateFolder(this.props.data.id, this.props.data.title);
+        this.props.marksHandler.current.navigateFolder(this.props.data.id, this.props.data.title, this.props.index);
       }
     }, React.createElement("p", null, this.props.data.title));
   }
@@ -85,12 +95,18 @@ class MarksHandler extends React.Component {
     this.state = {
       data: this.props.data
     };
-  } //given a folder id, go to that folder. provide title for toast functions
+  } //given a folder id, go to that folder. provide title for toast functions.
+  //if modifyToast is provided, modify toast instead of adding
 
 
-  navigateFolder(folderId, folderName = "") {
+  navigateFolder(folderId, folderName = "", modifyToast = -1) {
     chrome.bookmarks.getChildren(folderId, data => {
-      this.props.controlHandler.current.addToast(folderId, folderName);
+      if (modifyToast < 0) {
+        this.props.controlHandler.current.addToast(folderId, folderName);
+      } else {
+        this.props.controlHandler.current.modifyToast(modifyToast);
+      }
+
       this.setState({
         data
       });
