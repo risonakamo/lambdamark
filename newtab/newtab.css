@@ -90,3 +90,12 @@ a {
   word-break: break-word;
   box-sizing: border-box;
 }
+.sankaku {
+  display: inline-block;
+  background-color: #353030;
+  padding: 10px 5px 20px 5px;
+  border-radius: 5px;
+}
+.sankaku img {
+  height: 20px;
+}

@@ -31,7 +31,7 @@ class ControlHandler extends React.Component {
   render() {
     return React.createElement("div", {
       className: "control"
-    }, this.state.toasts.map((x, i) => {
+    }, React.createElement(Sankaku, null), this.state.toasts.map((x, i) => {
       return React.createElement(NavToast, {
         data: x,
         marksHandler: this.props.marksHandler,
@@ -55,6 +55,18 @@ class NavToast extends React.Component {
         this.props.marksHandler.current.navigateFolder(this.props.data.id, this.props.data.title, this.props.index);
       }
     }, React.createElement("p", null, this.props.data.title));
+  }
+
+} //Sankaku()
+
+
+class Sankaku extends React.Component {
+  render() {
+    return React.createElement("div", {
+      className: "sankaku"
+    }, React.createElement("img", {
+      src: "yellowtriangle.svg"
+    }));
   }
 
 }

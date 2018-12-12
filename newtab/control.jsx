@@ -29,6 +29,8 @@ class ControlHandler extends React.Component
   render()
   {
     return <div className="control">
+      <Sankaku/>
+
       {this.state.toasts.map((x,i)=>{
         return <NavToast data={x} marksHandler={this.props.marksHandler} key={i} index={i}/>;
       })}
@@ -46,6 +48,17 @@ class NavToast extends React.Component
   {
     return <div className="toast" onClick={()=>{this.props.marksHandler.current.navigateFolder(this.props.data.id,this.props.data.title,this.props.index)}}>
       <p>{this.props.data.title}</p>
+    </div>;
+  }
+}
+
+//Sankaku()
+class Sankaku extends React.Component
+{
+  render()
+  {
+    return <div className="sankaku">
+      <img src="yellowtriangle.svg"/>
     </div>;
   }
 }
