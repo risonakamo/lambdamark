@@ -29,13 +29,15 @@ class MarksHandler extends React.Component {
   render() {
     return React.createElement("div", {
       className: "marks"
+    }, React.createElement("div", {
+      className: "marks-inner"
     }, this.state.data.map((x, i) => {
       return React.createElement(MarkEntry, {
         data: x,
         key: i,
         navigateFolder: this.navigateFolder
       });
-    }));
+    })));
   }
 
 } //MarkEntry(bookmarkObject data,parent-function navigateFolder)

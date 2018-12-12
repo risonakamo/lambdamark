@@ -35,9 +35,11 @@ class MarksHandler extends React.Component
   render()
   {
     return <div className="marks">
-      {this.state.data.map((x,i)=>{
-        return <MarkEntry data={x} key={i} navigateFolder={this.navigateFolder}/>;
-      })}
+      <div className="marks-inner">
+        {this.state.data.map((x,i)=>{
+          return <MarkEntry data={x} key={i} navigateFolder={this.navigateFolder}/>;
+        })}
+      </div>
     </div>;
   }
 }

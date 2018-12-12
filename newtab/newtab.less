@@ -3,9 +3,15 @@
 @dark-color: #353030;
 @light-brown: #b5a17c;
 
+html
+{
+    height: 100%;
+}
+
 body
 {
     margin: 0;
+    height: 100%;
 
     //remove eventually for customisableness
     background-attachment: fixed;
@@ -32,19 +38,24 @@ a
 
 .wrap
 {
+    display: flex;
     width: 800px;
+    height: 100%;
     margin: 0 0 0 auto;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .marks
 {
-    padding: 10px 0 0 0;
+    height: 100%;
+    overflow: auto;
 }
 
 .control
 {
     font-size: 0;
-    padding-top: 10px;
+    padding: 10px 0 5px 0;
 
     .toast
     {
