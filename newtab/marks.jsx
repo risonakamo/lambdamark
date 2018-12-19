@@ -11,6 +11,8 @@ class MarksHandler extends React.Component
     this.state={
       data:this.props.data
     };
+
+    this.controlMarks=React.createRef(); //control marks object
   }
 
   //given a folder id, go to that folder. provide title for toast functions.
@@ -32,15 +34,24 @@ class MarksHandler extends React.Component
     });
   }
 
+  toggleControlMarks()
+  {
+    this.controlMarks.current.toggleEnabled();
+  }
+
   render()
   {
-    return <div className="marks">
-      <div className="marks-inner">
-        {this.state.data.map((x,i)=>{
-          return <MarkEntry data={x} key={i} navigateFolder={this.navigateFolder}/>;
-        })}
+    return (
+      <div className="marks">
+        <div className="marks-inner">
+          <ControlMarks ref={this.controlMarks}/>
+
+          {this.state.data.map((x,i)=>{
+            return <MarkEntry data={x} key={i} navigateFolder={this.navigateFolder}/>;
+          })}
+        </div>
       </div>
-    </div>;
+    );
   }
 }
 
@@ -53,15 +64,70 @@ class MarkEntry extends React.Component
   {
     if (!this.props.data.url)
     {
-      return <div className="mark folder" onClick={()=>{this.props.navigateFolder(this.props.data.id,this.props.data.title)}}>
-        <img src="material-folder.svg"/>
-        <p>{this.props.data.title}</p>
-      </div>;
+      return (
+        <div className="mark folder" onClick={()=>{this.props.navigateFolder(this.props.data.id,this.props.data.title)}}>
+          <img src="material-folder.svg"/>
+          <p>{this.props.data.title}</p>
+        </div>
+      );
     }
 
-    return <a className="mark" href={this.props.data.url}>
-      <img src={`chrome://favicon/${this.props.data.url}`}/>
-      <p>{this.props.data.title}</p>
-    </a>;
+    return (
+      <a className="mark" href={this.props.data.url}>
+        <img src={`chrome://favicon/${this.props.data.url}`}/>
+        <p>{this.props.data.title}</p>
+      </a>
+    );
+  }
+}
+
+//the control marks holder
+//ControlMarks()
+class ControlMarks extends React.Component
+{
+  constructor(props)
+  {
+    super(props);
+
+    this.state={
+      enabled:0
+    };
+
+    this.internalLinks=[
+      {title:"History",url:"chrome://history"},
+      {title:"Downloads",url:"chrome://downloads"},
+      {title:"Bookmarks",url:"chrome://bookmarks"},
+      {title:"Extensions",url:"chrome://extensions"}
+    ];
+  }
+
+  toggleEnabled()
+  {
+    this.setState({enabled:this.state.enabled?0:1});
+  }
+
+  spawnLinks()
+  {
+
+  }
+
+  render()
+  {
+    if (this.state.enabled)
+    {
+      if (!this.internalLinksElements)
+      {
+        this.internalLinksElements=this.internalLinks.map((x,i)=>{
+          return <div className="mark folder internal" key={i} onClick={()=>{chrome.tabs.update({url:x.url})}}>
+            <img src="yellowtriangle.svg"/>
+            <p>{x.title}</p>
+          </div>;
+        });
+      }
+
+      return this.internalLinksElements;
+    }
+
+    return null;
   }
 }

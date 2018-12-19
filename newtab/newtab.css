@@ -78,6 +78,9 @@ a {
 .mark.folder:hover {
   background-color: #b5a17c;
 }
+.mark.internal img {
+  margin-bottom: 20px;
+}
 .mark img {
   width: 25px;
   height: 25px;

@@ -29,7 +29,7 @@ class ControlHandler extends React.Component
   render()
   {
     return <div className="control">
-      <Sankaku/>
+      <Sankaku marksHandler={this.props.marksHandler}/>
 
       {this.state.toasts.map((x,i)=>{
         return <NavToast data={x} marksHandler={this.props.marksHandler} key={i} index={i}/>;
@@ -46,9 +46,14 @@ class NavToast extends React.Component
 {
   render()
   {
-    return <div className="toast" onClick={()=>{this.props.marksHandler.current.navigateFolder(this.props.data.id,this.props.data.title,this.props.index)}}>
-      <p>{this.props.data.title}</p>
-    </div>;
+    return (
+      <div className="toast" onClick={()=>{
+          this.props.marksHandler.current.navigateFolder(this.props.data.id,this.props.data.title,this.props.index);
+        }}
+      >
+        <p>{this.props.data.title}</p>
+      </div>
+    );
   }
 }
 
@@ -57,7 +62,7 @@ class Sankaku extends React.Component
 {
   render()
   {
-    return <div className="sankaku">
+    return <div className="sankaku" onClick={()=>{this.props.marksHandler.current.toggleControlMarks()}}>
       <img src="yellowtriangle.svg"/>
     </div>;
   }
