@@ -33,7 +33,8 @@ class MarksHandler extends React.Component {
 
   render() {
     return React.createElement("div", {
-      className: "marks"
+      className: "marks",
+      tabIndex: "0"
     }, React.createElement("div", {
       className: "marks-inner"
     }, React.createElement(ControlMarks, {

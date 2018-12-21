@@ -32,6 +32,7 @@ a {
 .marks {
   height: 100%;
   overflow: auto;
+  outline: none;
 }
 .control {
   font-size: 0;

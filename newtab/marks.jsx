@@ -42,7 +42,7 @@ class MarksHandler extends React.Component
   render()
   {
     return (
-      <div className="marks">
+      <div className="marks" tabIndex="0">
         <div className="marks-inner">
           <ControlMarks ref={this.controlMarks}/>
 
