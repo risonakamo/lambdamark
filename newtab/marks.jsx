@@ -1,4 +1,5 @@
 //MarksHandler(bookmarkObject[] data,component controlHandler)
+//main handler for marks area
 //data: initial data of bookmark objects
 //controlHandler: the controlHandler component
 class MarksHandler extends React.Component
@@ -13,6 +14,7 @@ class MarksHandler extends React.Component
     };
 
     this.controlMarks=React.createRef(); //control marks object
+    this.mainMarks=React.createRef();
   }
 
   //given a folder id, go to that folder. provide title for toast functions.
@@ -30,19 +32,22 @@ class MarksHandler extends React.Component
         this.props.controlHandler.current.modifyToast(modifyToast);
       }
 
+      this.controlMarks.current.setDisabled();
       this.setState({data});
     });
   }
 
+  //for passing up
   toggleControlMarks()
   {
     this.controlMarks.current.toggleEnabled();
+    this.mainMarks.current.scrollTo(0,0);
   }
 
   render()
   {
     return (
-      <div className="marks" tabIndex="0">
+      <div className="marks" tabIndex="0" ref={this.mainMarks}>
         <div className="marks-inner">
           <ControlMarks ref={this.controlMarks}/>
 
@@ -56,6 +61,7 @@ class MarksHandler extends React.Component
 }
 
 //MarkEntry(bookmarkObject data,parent-function navigateFolder)
+//singular marks entry. doesnt really do much
 //data: bookmark object from chrome api (see data specs)
 //navigateFolder: navigateFolder function from parent
 class MarkEntry extends React.Component
@@ -81,8 +87,8 @@ class MarkEntry extends React.Component
   }
 }
 
-//the control marks holder
 //ControlMarks()
+//the control marks holder, holding the control buttons. controls its own appearance
 class ControlMarks extends React.Component
 {
   constructor(props)
@@ -106,9 +112,9 @@ class ControlMarks extends React.Component
     this.setState({enabled:this.state.enabled?0:1});
   }
 
-  spawnLinks()
+  setDisabled()
   {
-
+    this.setState({enabled:0});
   }
 
   render()

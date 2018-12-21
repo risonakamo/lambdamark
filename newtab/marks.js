@@ -1,4 +1,5 @@
 //MarksHandler(bookmarkObject[] data,component controlHandler)
+//main handler for marks area
 //data: initial data of bookmark objects
 //controlHandler: the controlHandler component
 class MarksHandler extends React.Component {
@@ -9,6 +10,8 @@ class MarksHandler extends React.Component {
       data: this.props.data
     };
     this.controlMarks = React.createRef(); //control marks object
+
+    this.mainMarks = React.createRef();
   } //given a folder id, go to that folder. provide title for toast functions.
   //if modifyToast is provided, modify toast instead of adding
 
@@ -21,20 +24,24 @@ class MarksHandler extends React.Component {
         this.props.controlHandler.current.modifyToast(modifyToast);
       }
 
+      this.controlMarks.current.setDisabled();
       this.setState({
         data
       });
     });
-  }
+  } //for passing up
+
 
   toggleControlMarks() {
     this.controlMarks.current.toggleEnabled();
+    this.mainMarks.current.scrollTo(0, 0);
   }
 
   render() {
     return React.createElement("div", {
       className: "marks",
-      tabIndex: "0"
+      tabIndex: "0",
+      ref: this.mainMarks
     }, React.createElement("div", {
       className: "marks-inner"
     }, React.createElement(ControlMarks, {
@@ -49,6 +56,7 @@ class MarksHandler extends React.Component {
   }
 
 } //MarkEntry(bookmarkObject data,parent-function navigateFolder)
+//singular marks entry. doesnt really do much
 //data: bookmark object from chrome api (see data specs)
 //navigateFolder: navigateFolder function from parent
 
@@ -74,8 +82,8 @@ class MarkEntry extends React.Component {
     }), React.createElement("p", null, this.props.data.title));
   }
 
-} //the control marks holder
-//ControlMarks()
+} //ControlMarks()
+//the control marks holder, holding the control buttons. controls its own appearance
 
 
 class ControlMarks extends React.Component {
@@ -105,7 +113,11 @@ class ControlMarks extends React.Component {
     });
   }
 
-  spawnLinks() {}
+  setDisabled() {
+    this.setState({
+      enabled: 0
+    });
+  }
 
   render() {
     if (this.state.enabled) {
