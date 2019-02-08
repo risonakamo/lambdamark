@@ -1,0 +1,14 @@
+-history
+-bookmark manager
+-extensions page
+-downloads
+
+-maybe chrome options?
+
+-own options (the extension's options)
+
+right clicking:
+-should spawn a menu where things can be changed
+    -bookmark title
+    -bookmark link, but maybe make this not editable and only copyable
+    -a button to go to the bookmark in the bookmark manager

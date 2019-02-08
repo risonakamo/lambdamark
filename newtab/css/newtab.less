@@ -153,6 +153,51 @@ a
 {
     .sankaku();
     display: block;
+    // display: none;
     width: 725px;
     margin-top: 6px;
+
+    img
+    {
+        padding: 0 20px 0 20px;
+    }
+
+    .input-areas
+    {
+        display: inline-block;
+        width: 70%;
+
+        input
+        {
+            display: block;
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid white;
+            background-color: transparent;
+            color: white;
+            outline: none;
+            padding: 5px;
+            font-size: 13px;
+            font-family: "roboto";
+            box-sizing: border-box;
+
+            &.bookmark-title
+            {
+                font-size: 18px;
+            }
+        }
+
+        .in-dark-button
+        {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 5px;
+            border-radius: 4px;
+
+            img
+            {
+                padding: 0;
+            }
+        }
+    }
 }

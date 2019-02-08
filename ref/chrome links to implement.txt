@@ -1,8 +1,0 @@
--history
--bookmark manager
--extensions page
--downloads
-
--maybe chrome options?
-
--own options (the extension's options)

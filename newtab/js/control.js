@@ -60,7 +60,22 @@ class Sankaku extends React.Component {
   render() {
     return React.createElement("div", {
       className: "sankaku-control"
-    });
+    }, React.createElement("img", {
+      src: "img/testicon.png"
+    }), React.createElement("div", {
+      className: "input-areas"
+    }, React.createElement("input", {
+      type: "text",
+      className: "bookmark-title",
+      defaultValue: "Artifact mods are not enforcing any consistent standard and are just unilaterally content they don't like while allowing content they like to stay : Artifact"
+    }), React.createElement("input", {
+      type: "text",
+      defaultValue: "https://www.reddit.com/r/Artifact/comments/ag8ggi/artifact_mods_are_not_enforcing_any_consistent/"
+    }), React.createElement("div", {
+      className: "in-dark-button"
+    }, React.createElement("img", {
+      src: "img/tobookmarks.svg"
+    }))));
   }
 
 }
