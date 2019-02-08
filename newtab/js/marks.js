@@ -1,7 +1,3 @@
-//MarksHandler(bookmarkObject[] data,component controlHandler)
-//main handler for marks area
-//data: initial data of bookmark objects
-//controlHandler: the controlHandler component
 class MarksHandler extends React.Component {
   constructor(props) {
     super(props);
@@ -9,12 +5,9 @@ class MarksHandler extends React.Component {
     this.state = {
       data: this.props.data
     };
-    this.controlMarks = React.createRef(); //control marks object
-
+    this.controlMarks = React.createRef();
     this.mainMarks = React.createRef();
-  } //given a folder id, go to that folder. provide title for toast functions.
-  //if modifyToast is provided, modify toast instead of adding
-
+  }
 
   navigateFolder(folderId, folderName = "", modifyToast = -1) {
     chrome.bookmarks.getChildren(folderId, data => {
@@ -29,8 +22,7 @@ class MarksHandler extends React.Component {
         data
       });
     });
-  } //for passing up
-
+  }
 
   toggleControlMarks() {
     this.controlMarks.current.toggleEnabled();
@@ -55,11 +47,7 @@ class MarksHandler extends React.Component {
     })));
   }
 
-} //MarkEntry(bookmarkObject data,parent-function navigateFolder)
-//singular marks entry. doesnt really do much
-//data: bookmark object from chrome api (see data specs)
-//navigateFolder: navigateFolder function from parent
-
+}
 
 class MarkEntry extends React.Component {
   render() {
@@ -82,9 +70,7 @@ class MarkEntry extends React.Component {
     }), React.createElement("p", null, this.props.data.title));
   }
 
-} //ControlMarks()
-//the control marks holder, holding the control buttons. controls its own appearance
-
+}
 
 class ControlMarks extends React.Component {
   constructor(props) {
@@ -132,7 +118,7 @@ class ControlMarks extends React.Component {
               });
             }
           }, React.createElement("img", {
-            src: "imgd/yellowtriangle.svg"
+            src: "img/yellowtriangle.svg"
           }), React.createElement("p", null, x.title));
         });
       }

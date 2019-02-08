@@ -1,5 +1,3 @@
-//LambdaRoot(bookmarkObject[] data)
-//data: initial data of bookmarkobjects
 class LambdaRoot extends React.Component {
   constructor(props) {
     super(props);
