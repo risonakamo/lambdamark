@@ -30,7 +30,7 @@ class ControlHandler extends React.Component
   {
     return <div className="control">
       <div className="sankaku" onClick={()=>{this.props.marksHandler.current.toggleControlMarks()}}>
-        <img src="yellowtriangle.svg"/>
+        <img src="img/yellowtriangle.svg"/>
       </div>
 
       {this.state.toasts.map((x,i)=>{

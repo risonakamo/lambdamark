@@ -70,7 +70,7 @@ class MarkEntry extends React.Component {
           this.props.navigateFolder(this.props.data.id, this.props.data.title);
         }
       }, React.createElement("img", {
-        src: "material-folder.svg"
+        src: "img/material-folder.svg"
       }), React.createElement("p", null, this.props.data.title));
     }
 
@@ -132,7 +132,7 @@ class ControlMarks extends React.Component {
               });
             }
           }, React.createElement("img", {
-            src: "yellowtriangle.svg"
+            src: "imgd/yellowtriangle.svg"
           }), React.createElement("p", null, x.title));
         });
       }

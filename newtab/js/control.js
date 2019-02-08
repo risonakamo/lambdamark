@@ -37,7 +37,7 @@ class ControlHandler extends React.Component {
         this.props.marksHandler.current.toggleControlMarks();
       }
     }, React.createElement("img", {
-      src: "yellowtriangle.svg"
+      src: "img/yellowtriangle.svg"
     })), this.state.toasts.map((x, i) => {
       return React.createElement(NavToast, {
         data: x,

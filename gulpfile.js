@@ -15,12 +15,16 @@ var defaultPlumber=(err)=>{
 };
 
 var lessConfig={
-    targets:["**/*.less","*.less"],
+    targets:["newtab/css/newtab.less"],
     base:"."
 };
 
 var reactConfig={
-    targets:["**/*.jsx","*.jsx"],
+    targets:[
+        "newtab/js/control.jsx",
+        "newtab/js/lambdaroot.jsx",
+        "newtab/js/marks.jsx"
+    ],
     base:"."
 };
 

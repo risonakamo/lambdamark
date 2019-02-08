@@ -72,7 +72,7 @@ class MarkEntry extends React.Component
     {
       return (
         <div className="mark folder" onClick={()=>{this.props.navigateFolder(this.props.data.id,this.props.data.title)}}>
-          <img src="material-folder.svg"/>
+          <img src="img/material-folder.svg"/>
           <p>{this.props.data.title}</p>
         </div>
       );
@@ -125,7 +125,7 @@ class ControlMarks extends React.Component
       {
         this.internalLinksElements=this.internalLinks.map((x,i)=>{
           return <div className="mark folder internal" key={i} onClick={()=>{chrome.tabs.update({url:x.url})}}>
-            <img src="yellowtriangle.svg"/>
+            <img src="img/yellowtriangle.svg"/>
             <p>{x.title}</p>
           </div>;
         });
