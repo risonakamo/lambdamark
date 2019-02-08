@@ -29,11 +29,15 @@ class ControlHandler extends React.Component
   render()
   {
     return <div className="control">
-      <Sankaku marksHandler={this.props.marksHandler}/>
+      <div className="sankaku" onClick={()=>{this.props.marksHandler.current.toggleControlMarks()}}>
+        <img src="yellowtriangle.svg"/>
+      </div>
 
       {this.state.toasts.map((x,i)=>{
         return <NavToast data={x} marksHandler={this.props.marksHandler} key={i} index={i}/>;
       })}
+
+      <Sankaku/>
     </div>;
   }
 }
@@ -62,8 +66,10 @@ class Sankaku extends React.Component
 {
   render()
   {
-    return <div className="sankaku" onClick={()=>{this.props.marksHandler.current.toggleControlMarks()}}>
-      <img src="yellowtriangle.svg"/>
-    </div>;
+    return (
+      <div className="sankaku-control">
+
+      </div>
+    );
   }
 }

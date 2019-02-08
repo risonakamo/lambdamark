@@ -31,16 +31,21 @@ class ControlHandler extends React.Component {
   render() {
     return React.createElement("div", {
       className: "control"
-    }, React.createElement(Sankaku, {
-      marksHandler: this.props.marksHandler
-    }), this.state.toasts.map((x, i) => {
+    }, React.createElement("div", {
+      className: "sankaku",
+      onClick: () => {
+        this.props.marksHandler.current.toggleControlMarks();
+      }
+    }, React.createElement("img", {
+      src: "yellowtriangle.svg"
+    })), this.state.toasts.map((x, i) => {
       return React.createElement(NavToast, {
         data: x,
         marksHandler: this.props.marksHandler,
         key: i,
         index: i
       });
-    }));
+    }), React.createElement(Sankaku, null));
   }
 
 } //NavToast(bookmarkObjectToast data,component marksHandler,int index)
@@ -65,13 +70,8 @@ class NavToast extends React.Component {
 class Sankaku extends React.Component {
   render() {
     return React.createElement("div", {
-      className: "sankaku",
-      onClick: () => {
-        this.props.marksHandler.current.toggleControlMarks();
-      }
-    }, React.createElement("img", {
-      src: "yellowtriangle.svg"
-    }));
+      className: "sankaku-control"
+    });
   }
 
 }
