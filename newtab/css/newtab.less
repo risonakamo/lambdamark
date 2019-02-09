@@ -149,6 +149,7 @@ a
     }
 }
 
+//bookmark control element
 .sankaku-control
 {
     .sankaku();
@@ -156,16 +157,19 @@ a
     // display: none;
     width: 725px;
     margin-top: 6px;
+    padding: 10px 5px 8px 5px;
 
+    //bookmark icon img
     img
     {
-        padding: 0 20px 0 20px;
+        vertical-align: top;
+        padding: 28px 53px 0px 28px;
     }
 
     .input-areas
     {
         display: inline-block;
-        width: 70%;
+        width: 82%;
 
         input
         {
@@ -190,13 +194,20 @@ a
         .in-dark-button
         {
             display: inline-block;
-            margin-top: 6px;
+            margin-top: 5px;
             padding: 5px;
             border-radius: 4px;
+            transition: background-color .2s;
+            cursor: pointer;
 
             img
             {
                 padding: 0;
+            }
+
+            &:hover
+            {
+                background-color: @light-brown;
             }
         }
     }

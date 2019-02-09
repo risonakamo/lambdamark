@@ -72,7 +72,8 @@ class Sankaku extends React.Component {
       type: "text",
       defaultValue: "https://www.reddit.com/r/Artifact/comments/ag8ggi/artifact_mods_are_not_enforcing_any_consistent/"
     }), React.createElement("div", {
-      className: "in-dark-button"
+      className: "in-dark-button",
+      title: "Show in bookmark manager"
     }, React.createElement("img", {
       src: "img/tobookmarks.svg"
     }))));
