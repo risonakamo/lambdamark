@@ -116,6 +116,9 @@ a {
 .sankaku-control img {
   height: 20px;
 }
+.sankaku-control.disabled {
+  display: none;
+}
 .sankaku-control img {
   vertical-align: top;
   padding: 28px 53px 0px 28px;

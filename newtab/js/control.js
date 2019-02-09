@@ -57,9 +57,25 @@ class NavToast extends React.Component {
 }
 
 class Sankaku extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bookmark: {
+        title: "",
+        url: ""
+      }
+    };
+  }
+
+  loadBookmark(bookmark) {
+    this.setState({
+      bookmark
+    });
+  }
+
   render() {
     return React.createElement("div", {
-      className: "sankaku-control"
+      className: "sankaku-control disabled"
     }, React.createElement("img", {
       src: "img/testicon.png"
     }), React.createElement("div", {
@@ -67,10 +83,12 @@ class Sankaku extends React.Component {
     }, React.createElement("input", {
       type: "text",
       className: "bookmark-title",
-      defaultValue: "Artifact mods are not enforcing any consistent standard and are just unilaterally content they don't like while allowing content they like to stay : Artifact"
+      value: this.state.bookmark.title,
+      readOnly: true
     }), React.createElement("input", {
       type: "text",
-      defaultValue: "https://www.reddit.com/r/Artifact/comments/ag8ggi/artifact_mods_are_not_enforcing_any_consistent/"
+      value: this.state.url,
+      readOnly: true
     }), React.createElement("div", {
       className: "in-dark-button",
       title: "Show in bookmark manager"

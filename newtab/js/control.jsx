@@ -61,18 +61,38 @@ class NavToast extends React.Component
   }
 }
 
+//currently just the bookmark control edit popup thing
 //Sankaku()
 class Sankaku extends React.Component
 {
+  constructor(props)
+  {
+    super(props);
+
+    this.state={
+      //current loaded bookmark
+      bookmark:{
+        title:"",
+        url:""
+      }
+    };
+  }
+
+  //load a bookmarkObject
+  loadBookmark(bookmark)
+  {
+    this.setState({bookmark});
+  }
+
   render()
   {
     return (
-      <div className="sankaku-control">
+      <div className="sankaku-control disabled">
         <img src="img/testicon.png"/>
 
         <div className="input-areas">
-          <input type="text" className="bookmark-title" defaultValue="Artifact mods are not enforcing any consistent standard and are just unilaterally content they don't like while allowing content they like to stay : Artifact"/>
-          <input type="text" defaultValue="https://www.reddit.com/r/Artifact/comments/ag8ggi/artifact_mods_are_not_enforcing_any_consistent/"/>
+          <input type="text" className="bookmark-title" value={this.state.bookmark.title} readOnly/>
+          <input type="text" value={this.state.url} readOnly/>
           <div className="in-dark-button" title="Show in bookmark manager"><img src="img/tobookmarks.svg"/></div>
         </div>
       </div>
