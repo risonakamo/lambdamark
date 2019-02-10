@@ -28,7 +28,7 @@ class ControlHandler extends React.Component
     this.setState({toasts:this.state.toasts.slice(0,index+1)});
   }
 
-  //call sankaku control's bookmark load function
+  //call sankakucontrol's bookmark load function
   bookmarkEditLoad(bookmark)
   {
     this.sankakuControl.current.loadBookmark(bookmark);
