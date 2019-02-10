@@ -4,6 +4,7 @@ class ControlHandler extends React.Component {
     this.state = {
       toasts: [this.props.initialToast]
     };
+    this.sankakuControl = React.createRef();
   }
 
   addToast(folderId, folderName) {
@@ -20,6 +21,10 @@ class ControlHandler extends React.Component {
     this.setState({
       toasts: this.state.toasts.slice(0, index + 1)
     });
+  }
+
+  bookmarkEditLoad(bookmark) {
+    this.sankakuControl.current.loadBookmark(bookmark);
   }
 
   render() {
@@ -39,7 +44,9 @@ class ControlHandler extends React.Component {
         key: i,
         index: i
       });
-    }), React.createElement(Sankaku, null));
+    }), React.createElement(Sankaku, {
+      ref: this.sankakuControl
+    }));
   }
 
 }
@@ -59,6 +66,7 @@ class NavToast extends React.Component {
 class Sankaku extends React.Component {
   constructor(props) {
     super(props);
+    this.linkBookmarkManager = this.linkBookmarkManager.bind(this);
     this.state = {
       bookmark: {
         title: "",
@@ -69,15 +77,29 @@ class Sankaku extends React.Component {
 
   loadBookmark(bookmark) {
     this.setState({
-      bookmark
+      bookmark,
+      enabled: 1
+    });
+  }
+
+  linkBookmarkManager() {
+    chrome.tabs.create({
+      url: `chrome://bookmarks/?q=${encodeURI(this.state.bookmark.title)}`,
+      active: true
     });
   }
 
   render() {
+    var disabledClass = "disabled";
+
+    if (this.state.enabled) {
+      disabledClass = "";
+    }
+
     return React.createElement("div", {
-      className: "sankaku-control disabled"
+      className: `sankaku-control ${disabledClass}`
     }, React.createElement("img", {
-      src: "img/testicon.png"
+      src: `chrome://favicon/${this.state.bookmark.url}`
     }), React.createElement("div", {
       className: "input-areas"
     }, React.createElement("input", {
@@ -87,11 +109,12 @@ class Sankaku extends React.Component {
       readOnly: true
     }), React.createElement("input", {
       type: "text",
-      value: this.state.url,
+      value: this.state.bookmark.url,
       readOnly: true
     }), React.createElement("div", {
       className: "in-dark-button",
-      title: "Show in bookmark manager"
+      title: "Show in bookmark manager",
+      onClick: this.linkBookmarkManager
     }, React.createElement("img", {
       src: "img/tobookmarks.svg"
     }))));

@@ -8,6 +8,7 @@ class MarksHandler extends React.Component
   {
     super(props);
     this.navigateFolder=this.navigateFolder.bind(this);
+    this.bookmarkEditLoad=this.bookmarkEditLoad.bind(this);
 
     this.state={
       data:this.props.data
@@ -44,6 +45,12 @@ class MarksHandler extends React.Component
     this.mainMarks.current.scrollTo(0,0);
   }
 
+  //call controlHandler's bookmarkEditLoad
+  bookmarkEditLoad(bookmark)
+  {
+    this.props.controlHandler.current.bookmarkEditLoad(bookmark);
+  }
+
   render()
   {
     return (
@@ -52,7 +59,7 @@ class MarksHandler extends React.Component
           <ControlMarks ref={this.controlMarks}/>
 
           {this.state.data.map((x,i)=>{
-            return <MarkEntry data={x} key={i} navigateFolder={this.navigateFolder}/>;
+            return <MarkEntry data={x} key={i} navigateFolder={this.navigateFolder} bookmarkEditLoad={this.bookmarkEditLoad}/>;
           })}
         </div>
       </div>
@@ -60,12 +67,26 @@ class MarksHandler extends React.Component
   }
 }
 
-//MarkEntry(bookmarkObject data,parent-function navigateFolder)
+//MarkEntry(bookmarkObject data,parent-function navigateFolder,parent-function bookmarkEditLoad)
 //singular marks entry. doesnt really do much
 //data: bookmark object from chrome api (see data specs)
 //navigateFolder: navigateFolder function from parent
+//bookmarkEditLoad: bookmarkEditLoad function from parent
 class MarkEntry extends React.Component
 {
+  constructor(props)
+  {
+    super(props);
+    this.rightClickAction=this.rightClickAction.bind(this);
+  }
+
+  rightClickAction(e)
+  {
+    e.preventDefault();
+
+    this.props.bookmarkEditLoad(this.props.data);
+  }
+
   render()
   {
     if (!this.props.data.url)
@@ -79,7 +100,7 @@ class MarkEntry extends React.Component
     }
 
     return (
-      <a className="mark" href={this.props.data.url}>
+      <a className="mark" href={this.props.data.url} onContextMenu={this.rightClickAction}>
         <img src={`chrome://favicon/${this.props.data.url}`}/>
         <p>{this.props.data.title}</p>
       </a>

@@ -2,6 +2,7 @@ class MarksHandler extends React.Component {
   constructor(props) {
     super(props);
     this.navigateFolder = this.navigateFolder.bind(this);
+    this.bookmarkEditLoad = this.bookmarkEditLoad.bind(this);
     this.state = {
       data: this.props.data
     };
@@ -29,6 +30,10 @@ class MarksHandler extends React.Component {
     this.mainMarks.current.scrollTo(0, 0);
   }
 
+  bookmarkEditLoad(bookmark) {
+    this.props.controlHandler.current.bookmarkEditLoad(bookmark);
+  }
+
   render() {
     return React.createElement("div", {
       className: "marks",
@@ -42,7 +47,8 @@ class MarksHandler extends React.Component {
       return React.createElement(MarkEntry, {
         data: x,
         key: i,
-        navigateFolder: this.navigateFolder
+        navigateFolder: this.navigateFolder,
+        bookmarkEditLoad: this.bookmarkEditLoad
       });
     })));
   }
@@ -50,6 +56,16 @@ class MarksHandler extends React.Component {
 }
 
 class MarkEntry extends React.Component {
+  constructor(props) {
+    super(props);
+    this.rightClickAction = this.rightClickAction.bind(this);
+  }
+
+  rightClickAction(e) {
+    e.preventDefault();
+    this.props.bookmarkEditLoad(this.props.data);
+  }
+
   render() {
     if (!this.props.data.url) {
       return React.createElement("div", {
@@ -64,7 +80,8 @@ class MarkEntry extends React.Component {
 
     return React.createElement("a", {
       className: "mark",
-      href: this.props.data.url
+      href: this.props.data.url,
+      onContextMenu: this.rightClickAction
     }, React.createElement("img", {
       src: `chrome://favicon/${this.props.data.url}`
     }), React.createElement("p", null, this.props.data.title));

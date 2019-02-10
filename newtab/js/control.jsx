@@ -10,6 +10,8 @@ class ControlHandler extends React.Component
     this.state={
       toasts:[this.props.initialToast]
     };
+
+    this.sankakuControl=React.createRef();
   }
 
   //add a toast with the specified stuff
@@ -26,6 +28,12 @@ class ControlHandler extends React.Component
     this.setState({toasts:this.state.toasts.slice(0,index+1)});
   }
 
+  //call sankaku control's bookmark load function
+  bookmarkEditLoad(bookmark)
+  {
+    this.sankakuControl.current.loadBookmark(bookmark);
+  }
+
   render()
   {
     return <div className="control">
@@ -37,7 +45,7 @@ class ControlHandler extends React.Component
         return <NavToast data={x} marksHandler={this.props.marksHandler} key={i} index={i}/>;
       })}
 
-      <Sankaku/>
+      <Sankaku ref={this.sankakuControl}/>
     </div>;
   }
 }
@@ -68,6 +76,7 @@ class Sankaku extends React.Component
   constructor(props)
   {
     super(props);
+    this.linkBookmarkManager=this.linkBookmarkManager.bind(this);
 
     this.state={
       //current loaded bookmark
@@ -75,25 +84,46 @@ class Sankaku extends React.Component
         title:"",
         url:""
       }
+      //enabled:0*
     };
   }
 
+  //public
   //load a bookmarkObject
   loadBookmark(bookmark)
   {
-    this.setState({bookmark});
+    this.setState({bookmark,enabled:1});
+  }
+
+  //open new tab to bookmark manager with a search for the current bookmark
+  linkBookmarkManager()
+  {
+    chrome.tabs.create({
+      url:`chrome://bookmarks/?q=${encodeURI(this.state.bookmark.title)}`,
+      active:true
+    });
   }
 
   render()
   {
+    var disabledClass="disabled";
+    if (this.state.enabled)
+    {
+      disabledClass="";
+    }
+
     return (
-      <div className="sankaku-control disabled">
-        <img src="img/testicon.png"/>
+      <div className={`sankaku-control ${disabledClass}`}>
+        <img src={`chrome://favicon/${this.state.bookmark.url}`}/>
 
         <div className="input-areas">
           <input type="text" className="bookmark-title" value={this.state.bookmark.title} readOnly/>
-          <input type="text" value={this.state.url} readOnly/>
-          <div className="in-dark-button" title="Show in bookmark manager"><img src="img/tobookmarks.svg"/></div>
+
+          <input type="text" value={this.state.bookmark.url} readOnly/>
+
+          <div className="in-dark-button" title="Show in bookmark manager" onClick={this.linkBookmarkManager}>
+            <img src="img/tobookmarks.svg"/>
+          </div>
         </div>
       </div>
     );
