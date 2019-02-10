@@ -73,6 +73,20 @@ a
             color: white;
             padding: 0px 10px 0 10px;
             line-height: 30px;
+
+            //for probably home img thats in toast
+            img
+            {
+                height: 25px;
+                vertical-align: top;
+                padding-top: 2px;
+            }
+
+            //the first toast with a home icon gets different padding
+            &:nth-of-type(1)
+            {
+                padding: 0 3px 0 3px;
+            }
         }
     }
 }

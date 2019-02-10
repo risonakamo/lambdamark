@@ -52,6 +52,14 @@ a {
   padding: 0px 10px 0 10px;
   line-height: 30px;
 }
+.control .toast p img {
+  height: 25px;
+  vertical-align: top;
+  padding-top: 2px;
+}
+.control .toast p:nth-of-type(1) {
+  padding: 0 3px 0 3px;
+}
 .mark {
   display: inline-flex;
   width: 90px;

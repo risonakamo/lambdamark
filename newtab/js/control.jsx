@@ -58,12 +58,18 @@ class NavToast extends React.Component
 {
   render()
   {
+    var toastText=this.props.data.title;
+    if (toastText=="/")
+    {
+      toastText=<img src="img/home.svg"/>;
+    }
+
     return (
       <div className="toast" onClick={()=>{
           this.props.marksHandler.current.navigateFolder(this.props.data.id,this.props.data.title,this.props.index);
         }}
       >
-        <p>{this.props.data.title}</p>
+        <p>{toastText}</p>
       </div>
     );
   }

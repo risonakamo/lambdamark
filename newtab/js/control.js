@@ -53,12 +53,20 @@ class ControlHandler extends React.Component {
 
 class NavToast extends React.Component {
   render() {
+    var toastText = this.props.data.title;
+
+    if (toastText == "/") {
+      toastText = React.createElement("img", {
+        src: "img/home.svg"
+      });
+    }
+
     return React.createElement("div", {
       className: "toast",
       onClick: () => {
         this.props.marksHandler.current.navigateFolder(this.props.data.id, this.props.data.title, this.props.index);
       }
-    }, React.createElement("p", null, this.props.data.title));
+    }, React.createElement("p", null, toastText));
   }
 
 }
