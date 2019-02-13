@@ -65,7 +65,19 @@ a
         background-color: @dark-color;
         border-radius: 5px;
         margin: 0 1px 0 1px;
+        transition: background-color .2s;
         cursor: pointer;
+
+        &:hover
+        {
+            background-color: @light-brown;
+        }
+
+        //the first toast with a home icon gets different padding
+        &:nth-of-type(2) p
+        {
+            padding: 0 3px 0 3px;
+        }
 
         p
         {
@@ -80,12 +92,6 @@ a
                 height: 25px;
                 vertical-align: top;
                 padding-top: 2px;
-            }
-
-            //the first toast with a home icon gets different padding
-            &:nth-of-type(1)
-            {
-                padding: 0 3px 0 3px;
             }
         }
     }
@@ -156,6 +162,7 @@ a
     background-color: @dark-color;
     padding: 10px 5px 20px 5px;
     border-radius: 5px;
+    cursor: pointer;
 
     img
     {

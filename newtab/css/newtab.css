@@ -44,7 +44,14 @@ a {
   background-color: #353030;
   border-radius: 5px;
   margin: 0 1px 0 1px;
+  transition: background-color 0.2s;
   cursor: pointer;
+}
+.control .toast:hover {
+  background-color: #b5a17c;
+}
+.control .toast:nth-of-type(2) p {
+  padding: 0 3px 0 3px;
 }
 .control .toast p {
   font-size: 13px;
@@ -56,9 +63,6 @@ a {
   height: 25px;
   vertical-align: top;
   padding-top: 2px;
-}
-.control .toast p:nth-of-type(1) {
-  padding: 0 3px 0 3px;
 }
 .mark {
   display: inline-flex;
@@ -107,6 +111,7 @@ a {
   background-color: #353030;
   padding: 10px 5px 20px 5px;
   border-radius: 5px;
+  cursor: pointer;
 }
 .sankaku img {
   height: 20px;
@@ -116,6 +121,7 @@ a {
   background-color: #353030;
   padding: 10px 5px 20px 5px;
   border-radius: 5px;
+  cursor: pointer;
   display: block;
   width: 725px;
   margin-top: 6px;
