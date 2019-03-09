@@ -91,8 +91,16 @@ class Sankaku extends React.Component {
   }
 
   linkBookmarkManager() {
+    var searchText;
+
+    if (this.state.bookmark.url) {
+      searchText = this.state.bookmark.url;
+    } else {
+      searchText = this.state.bookmark.title;
+    }
+
     chrome.tabs.create({
-      url: `chrome://bookmarks/?q=${encodeURI(this.state.bookmark.title)}`,
+      url: `chrome://bookmarks/?q=${encodeURI(searchText)}`,
       active: true
     });
   }
