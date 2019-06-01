@@ -8,9 +8,9 @@ body {
   background-attachment: fixed;
   background-size: 100% auto;
   background-position: bottom;
-  background-image: url("https://i.imgur.com/J4O4uT2.png");
+  background-image: url("https://i.imgur.com/1uP9UlY.png");
   background-repeat: no-repeat;
-  background-color: #fefff1;
+  background-color: #fcecdd;
   font-family: "roboto";
 }
 p {
@@ -25,9 +25,10 @@ a {
   display: flex;
   width: 800px;
   height: 100%;
-  margin: 0 0 0 auto;
+  margin: 0 auto 0 100px;
   flex-direction: column;
   overflow: hidden;
+  scrollbar-color: rebeccapurple green;
 }
 .marks {
   height: 100%;
@@ -48,7 +49,7 @@ a {
   cursor: pointer;
 }
 .control .toast:hover {
-  background-color: #b5a17c;
+  background-color: #fd5c62;
 }
 .control .toast:nth-of-type(2) p {
   padding: 0 3px 0 3px;
@@ -80,7 +81,7 @@ a {
   transition: background-color 0.2s;
 }
 .mark:hover {
-  background-color: #b5a17c;
+  background-color: #fd5c62;
 }
 .mark.folder {
   background-color: #353030;
@@ -89,7 +90,7 @@ a {
   cursor: pointer;
 }
 .mark.folder:hover {
-  background-color: #b5a17c;
+  background-color: #fd5c62;
 }
 .mark.internal img {
   margin-bottom: 20px;
@@ -169,5 +170,5 @@ a {
   padding: 0;
 }
 .sankaku-control .input-areas .in-dark-button:hover {
-  background-color: #b5a17c;
+  background-color: #fd5c62;
 }

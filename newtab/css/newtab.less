@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
 @dark-color: #353030;
-@light-brown: #b5a17c;
+@light-brown: #fd5c62;
+@main-background: #fcecdd;
 
 html
 {
@@ -17,9 +18,9 @@ body
     background-attachment: fixed;
     background-size: 100% auto;
     background-position: bottom;
-    background-image: url("https://i.imgur.com/J4O4uT2.png");
+    background-image: url("https://i.imgur.com/1uP9UlY.png");
     background-repeat: no-repeat;
-    background-color: #fefff1;
+    background-color: @main-background;
 
     font-family: "roboto";
 }
@@ -41,9 +42,10 @@ a
     display: flex;
     width: 800px;
     height: 100%;
-    margin: 0 0 0 auto;
+    margin: 0 auto 0 100px;
     flex-direction: column;
     overflow: hidden;
+    scrollbar-color: rebeccapurple green;
 }
 
 .marks
