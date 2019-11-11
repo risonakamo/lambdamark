@@ -35,6 +35,12 @@ a {
   overflow: auto;
   outline: none;
 }
+.marks .simplebar-track.simplebar-vertical {
+  width: 25px;
+}
+.marks .simplebar-track.simplebar-vertical .simplebar-scrollbar {
+  width: 18px;
+}
 .control {
   font-size: 0;
   padding: 10px 0 5px 0;

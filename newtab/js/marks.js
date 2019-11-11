@@ -38,7 +38,8 @@ class MarksHandler extends React.Component {
     return React.createElement("div", {
       className: "marks",
       tabIndex: "0",
-      ref: this.mainMarks
+      ref: this.mainMarks,
+      "data-simplebar": true
     }, React.createElement("div", {
       className: "marks-inner"
     }, React.createElement(ControlMarks, {

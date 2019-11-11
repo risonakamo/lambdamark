@@ -54,7 +54,7 @@ class MarksHandler extends React.Component
   render()
   {
     return (
-      <div className="marks" tabIndex="0" ref={this.mainMarks}>
+      <div className="marks" tabIndex="0" ref={this.mainMarks} data-simplebar>
         <div className="marks-inner">
           <ControlMarks ref={this.controlMarks}/>
 
